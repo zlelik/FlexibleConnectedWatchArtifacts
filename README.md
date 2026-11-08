@@ -1,6 +1,6 @@
-# FlexibleConnectedWatchImages
+# FlexibleConnectedWatchArtifacts
 
-This repository hosts images for FlexibleConnectedWatch app for Garmin watches.
+This repository hosts artifacts for the FlexibleConnectedWatch app for Garmin watches. At present that is the day and night background images; the `imgs/` path the app fetches from is unchanged by the rename.
 
 # Day and night background images
 

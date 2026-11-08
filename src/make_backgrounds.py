@@ -250,6 +250,7 @@ OUT = os.path.dirname(os.path.abspath(__file__))
 #because it says which watches a row is for, not because it changes the picture: every image fills
 #its frame and a round watch cuts it to the circle itself.
 TARGETS = [
+    (218, 218, 'round',        False),
     (240, 240, 'round',        False),
     (260, 260, 'round',        False),
     (280, 280, 'round',        False),
