@@ -43,6 +43,7 @@ jobs:
         run: |
           mkdir site
           cp tools/field-config-editor.html site/field-config-editor.html
+          cp tools/index.html site/index.html
 
       - name: Set up Pages
         uses: actions/configure-pages@v6
