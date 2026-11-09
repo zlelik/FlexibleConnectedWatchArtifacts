@@ -244,7 +244,8 @@ def write_png(path, rows, scheme):
 
 #--------------------------------------------------------------------------------------------------
 
-OUT = os.path.dirname(os.path.abspath(__file__))
+#The pictures go to imgs/ beside src/, which is the path the watch face downloads them from, wherever the script is run from.
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'imgs')
 
 #resolution, screen shape, and whether the display has only two colours. The shape is recorded
 #because it says which watches a row is for, not because it changes the picture: every image fills

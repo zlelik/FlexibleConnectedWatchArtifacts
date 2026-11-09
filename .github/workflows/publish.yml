@@ -1,0 +1,57 @@
+# Publishes the field config editor to GitHub Pages, and nothing else from this repository:
+#   https://zlelik.github.io/FlexibleConnectedWatchArtifacts/field-config-editor.html
+#
+# Before the first run, set Settings > Pages > Build and deployment > Source to "GitHub Actions".
+# After that, a push to main that changes the editor publishes it again, and the Actions tab can run
+# this workflow by hand. The images in imgs/ are not affected: the watch face downloads them from
+# raw.githubusercontent.com, not from the Pages site.
+
+name: Publish the editor to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/field-config-editor.html
+      - .github/workflows/publish.yml
+  workflow_dispatch:
+
+# What the deployment needs and no more: read the repository, write to Pages, and prove its identity to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time. A run already deploying is allowed to finish rather than being cancelled.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # page_url is the site's root, which ends with "/" and has no page of its own, so the link GitHub shows for the deployment names the editor itself.
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}field-config-editor.html
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+
+      # The site is a folder of its own containing the one page under its own name, so no other file of the repository is uploaded.
+      - name: Put the editor, and nothing else, into the site
+        run: |
+          mkdir site
+          cp tools/field-config-editor.html site/field-config-editor.html
+
+      - name: Set up Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

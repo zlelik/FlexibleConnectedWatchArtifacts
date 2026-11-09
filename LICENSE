@@ -1,21 +1,112 @@
-MIT License
+Copyright (c) 2026 zlelik. All rights reserved.
 
-Copyright (c) 2026 zlelik
+Everything in this repository made by zlelik, that is everything except the
+third-party material listed further down, is the property of zlelik: the
+background images in imgs/, the script in src/ that draws them, the prompts in
+docs/, and the field config editor in tools/ with its own code and data.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+It may be used only with FlexibleConnectedWatch, a watch face for Garmin
+watches, and only in these ways:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+  - the watch face, on any watch it is installed on, may download the images
+    in imgs/ and draw them;
+  - anyone may use the editor where zlelik publishes it,
+    https://zlelik.github.io/FlexibleConnectedWatchArtifacts/field-config-editor.html,
+    to write settings for the watch face, but not from a copy of it;
+  - anyone may give the prompts in docs/, as they are or as the editor
+    assembles them, to a language model to write settings for the watch face;
+  - a setting written in any of these ways, such as a FieldsConfig value, may
+    be used and shared as a setting of the watch face.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+Any other use, and any copying, modification or distribution of this material
+in whole or in part, needs the prior written permission of zlelik. Viewing and
+forking the repository on GitHub, which GitHub's Terms of Service allow for
+every public repository, gives no further right to use it.
+
+THE MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE MATERIAL OR ITS USE.
+
+
+THIRD-PARTY MATERIAL
+
+The terms above cover everything in this repository made by zlelik. The
+material listed below comes from other sources and stays under its own owners
+and licences, which the terms above do not change.
+
+
+1. Icon artwork in tools/field-config-editor.html
+
+The editor contains the icon sheets of the FlexibleConnectedWatch watch face,
+which are drawn from two icon fonts. Both are under the MIT License, whose text
+follows section 2.
+
+  Phosphor Icons, @phosphor-icons/web 2.1.2
+  Copyright (c) 2020-2021 Phosphor Icons
+  https://github.com/phosphor-icons/web
+
+  Tabler Icons, @tabler/icons-webfont 3.49.0
+  Copyright (c) 2020-2026 Paweł Kuna
+  https://github.com/tabler/tabler-icons
+
+
+2. Libraries the editor loads when it opens
+
+The editor loads these from cdn.jsdelivr.net and Google Fonts each time it is
+opened. They are not part of this repository; they are listed here because the
+editor depends on them.
+
+  Vue 3.5.44, MIT License, whose text follows this section
+  Copyright (c) 2018-present, Yuxi (Evan) You
+  https://github.com/vuejs/core
+
+  Element Plus 2.14.7, MIT License, whose text follows this section
+  Copyright (c) 2020-PRESENT Element Plus
+  https://github.com/element-plus/element-plus
+
+  Roboto Condensed, SIL Open Font License, Version 1.1
+  Copyright 2011 The Roboto Project Authors
+  https://github.com/googlefonts/roboto-classic
+  https://openfontlicense.org
+
+The MIT License, under which Phosphor Icons, Tabler Icons, Vue and Element Plus
+are licensed, each with its own copyright notice as given above:
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+
+3. Data read from the Garmin Connect IQ SDK
+
+So that its preview is laid out as a watch lays it out, the editor contains the
+name, screen shape and screen size of each supported watch, and the size and
+character widths of the fonts each one draws with, all read from the Garmin
+Connect IQ SDK. No file of the SDK and no font is included. The SDK itself is
+under the Garmin Connect IQ SDK License Agreement.
+
+
+4. Trademarks
+
+Garmin, Connect IQ, fēnix, epix, quatix, Forerunner, D2 and the other names of
+Garmin products are trademarks of Garmin Ltd. or its subsidiaries. The Bitcoin,
+Ethereum and Solana marks drawn by the btc, eth and sol icons belong to their
+owners. This project is not affiliated with or endorsed by Garmin or by any of
+those owners.
