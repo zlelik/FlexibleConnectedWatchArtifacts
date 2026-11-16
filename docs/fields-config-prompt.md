@@ -18,18 +18,18 @@ Default:
 [f1]src=batt;pos=50.0,7.0;just=center|vcenter;frmt=$1$%;nfrmt=%d;colorif=batt>20&isDay=1:0x005500,batt>20:green,batt>10:orange,*:red;sysfont=FONT_TINY;
 [f2]src=dayOfWNm,day,monthNm,year;pos=50.0,18.0;just=center|vcenter;frmt=$1$ $2$ $3$ $4$;colorif=isDay=1:black,*:0x00aaff;sysfont=FONT_SMALL;
 [f3]src=hour,min;pos=50.0,33.0;just=center|vcenter;frmt=$1$:$2$;nfrmt=%02d,%02d;tf=24h;colorif=isDay=1:black,*:0x00aaff;sysfont=FONT_NUMBER_HOT;
-[f4]src=url;pos=50.0,46.0;just=center|vcenter;url=https://myserver.com/r2j.php?url=https://feeds.bbci.co.uk/news/rss.xml&count=1;jsonsrc=items.0.title;frmt=$1$;trunc=25;colorif=isDay=1:black,*:0x00aaff;sysfont=FONT_TINY;
+[f4]src=url;pos=50.0,46.0;just=center|vcenter;url=https://gamed.info/r2j.php?url=https://www.nasa.gov/feed/&count=1;jsonsrc=items.0.title;frmt=$1$;trunc=25;colorif=isDay=1:black,*:0x00aaff;sysfont=FONT_TINY;
 [f5]src=steps,stepGoal;icon=steps;pos=50.0,55.5;just=center|vcenter;frmt=$1$/$2$;colorif=isDay=1:black,*:0x00aaff;sysfont=FONT_MEDIUM;
 [f6]src=sunrHour,sunrMin;pos=33.3,65.0;icon=sunrise;just=center|vcenter;frmt=$1$:$2$;nfrmt=%02d;colorif=isDay=1:black,*:0x00aaff;sysfont=FONT_TINY;
 [f7]src=sunsHour,sunsMin;pos=66.6,65.0;icon=sunset;just=center|vcenter;frmt=$1$:$2$;nfrmt=%02d;colorif=isDay=1:black,*:0x00aaff;sysfont=FONT_TINY;
 [f8]src=wHTemp,wHTemp[1],wHTemp[2];icon=temp;pos=35.0,75.0;just=left|vcenter;frmt=$1$/$2$/$3$;nfrmt=%d;noval=--;colorif=isDay=1:white,*:0x00aaff;sysfont=FONT_TINY;
 [f9]src=wDTempHi,wDTempHi[1];pos=35.0,84.0;just=left|vcenter;iconif=wCondS=0:sun,wCondS=1:sunCld,wCondS=2:cld,wCondS=3:rain,wCondS=4:snow,wCondS=5:storm,wCondS=6:fog,wCondS=7:wind,*:qst;frmt=$1$/$2$;nfrmt=%d;noval=--;colorif=isDay=1:white,*:0x00aaff;sysfont=FONT_TINY;
-[f10]src=url;icon=btc;iconcolorif=*:orange;pos=50.0,93.0;just=center|vcenter;url=https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd;jsonsrc=bitcoin.usd;frmt=$1$;nfrmt=%d;colorif=isDay=1:white,*:0x00aaff;sysfont=FONT_SMALL;
+[f10]src=url;icon=btc;iconcolorif=*:orange;pos=50.0,93.0;just=center|vcenter;url=https://api.alternative.me/v2/ticker/bitcoin/?structure=array;jsonsrc=data.0.quotes.USD.price;frmt=$1$;nfrmt=%d;colorif=isDay=1:white,*:0x00aaff;sysfont=FONT_SMALL;
 ```
 
 It is shown here one field to a line so that it can be read. The setting itself is one line, with no line break between the fields.
 
-Ten fields down the middle of the screen: the battery, the date, the time in the largest font the watch has, a BBC headline, steps against the daily goal, sunrise and sunset side by side, the next three hourly temperatures, today's and tomorrow's forecast high behind the condition icon, and the bitcoin price. Eight read the watch itself; the headline and the price are fetched from the web.
+Ten fields down the middle of the screen: the battery, the date, the time in the largest font the watch has, a NASA headline, steps against the daily goal, sunrise and sunset side by side, the next three hourly temperatures, today's and tomorrow's forecast high behind the condition icon, and the bitcoin price. Eight read the watch itself; the headline and the price are fetched from the web.
 
 Six fields carry an **icon** in place of a text label. `f9` is the only one that chooses its icon by rule rather than by name: its `iconif` covers every weather condition in nine rules by naming the condition groups of `wCondS`, and it is the worked example of section 5.10.3. The time has no icon on purpose: at `FONT_NUMBER_HOT` it is the one field nothing should compete with.
 
@@ -37,7 +37,15 @@ Three choices in it make the default work on as many watches as possible. Every 
 
 Nine of the ten fields colour their text by the time of day, which keeps it readable when the background picture changes with the sun. The six upper ones write `colorif=isDay=1:black,*:0x00aaff`: black over the light sky of the day picture, light blue on the dark night picture. The three lowest sit over the dark water at the bottom of the day picture and write `colorif=isDay=1:white,*:0x00aaff`, the same rule with white in place of black. The battery is the tenth and colours by charge, with the day as a second condition on its first rule. A single `color` cannot do any of this, because the background changes by rule too.
 
-The headline field reads a news feed through a converter. A news feed is RSS, which is XML and far too large for the watch, so the converter fetches the feed and answers with a little JSON: the converter's address is the value of `url`, and the feed's address is a parameter inside it. Only the first `=` of a pair splits it, so `url=https://myserver.com/r2j.php?url=https://feeds.bbci.co.uk/news/rss.xml&count=1` arrives whole. `jsonsrc=items.0.title` reads three steps into the answer, the middle step being a list index. `trunc=25` cuts the finished text to 25 characters, so a long headline stops before the edge of the screen.
+The headline field reads a news feed through a converter. A news feed is RSS, which is XML and far too large for the watch, so the converter fetches the feed and answers with a little JSON: the converter's address is the value of `url`, and the feed's address is a parameter inside it. Only the first `=` of a pair splits it, so `url=https://gamed.info/r2j.php?url=https://www.nasa.gov/feed/&count=1` arrives whole. `jsonsrc=items.0.title` reads three steps into the answer, the middle step being a list index. `trunc=25` cuts the finished text to 25 characters, so a long headline stops before the edge of the screen.
+
+Many news feeds can be read the same way, with the feed's address in the same place, for example:
+
+- `https://www.nasa.gov/feed/`
+- `https://globalvoices.org/-/topics/good-news/feed/`
+- `https://feeds.bbci.co.uk/news/education/rss.xml`
+
+You choose the feed, and its publisher's terms apply to your use; this watch face is not affiliated with or endorsed by any publisher.
 
 Two more details. The battery colour comes from `colorif`, which carries a rule list written exactly as the `BgRules` setting writes one, and its first rule `batt>20&isDay=1:0x005500` is the only rule in the default that names two conditions. And the forecast field asks `wDTempHi` for two different days through the index on each name.
 
@@ -303,7 +311,7 @@ pair   := key '=' value ';'
 
 The `[label]` opens a field. **The label text is ignored**: a field is numbered by its position in the config, so duplicate or out-of-order labels are harmless. Labels such as `[f1]`, `[f2]` keep a config readable.
 
-A pair splits on its **first** `=` only, because values contain `=` — a query string such as `?ids=bitcoin&vs_currencies=usd` must survive intact.
+A pair splits on its **first** `=` only, because values contain `=` — a query string such as `?structure=array` must survive intact.
 
 **The whole config is one line**, and every pair ends with `;`, the last one included. A field opens only where a `[` starts the config or comes straight after a `;`. A line break or a space in front of a `[` therefore stops that field opening: the watch applies its keys to the field before it, and says nothing.
 
@@ -332,7 +340,7 @@ A value ends at the first `;`. The config has escapes for the two characters tha
 | `just` | all | Alignment: `left`, `center` or `right` for x, and `vcenter` for y. Section 5.7, which shows how they are joined. Defaults to `left`, with y at the top of the text. |
 | `vis` | all | Conditions in the grammar of section 4.1, joined by `&`, with no `:` and no comma: `vis=isPhone=1`. The field is drawn only while they are all true. A condition that does not parse leaves the field visible. |
 | `url` | `src=url` | The address to fetch. Required for `src=url`. |
-| `jsonsrc` | `src=url` | Where the value is in the JSON answer, as a dotted path such as `bitcoin.usd` or `items.0.title`. Section 5.4. Required for `src=url`. |
+| `jsonsrc` | `src=url` | Where the value is in the JSON answer, as a dotted path such as `data.0.quotes.USD.price` or `items.0.title`. Section 5.4. Required for `src=url`. |
 | `icon` | all | An icon by name, as in `icon=sunrise`. Section 5.10. |
 | `iconif` | all | Icon by rule, in the grammar of section 4, with an icon name where the image index goes: `wCondS=3:rain,*:sun`. The first match wins and beats `icon`; no match leaves `icon` to decide. |
 | `iconcolorif` | all | Colour the icon by rule, the same grammar as `colorif`. Without it the icon takes whatever colour the text is drawn in. |
@@ -357,7 +365,7 @@ A value the watch cannot supply is empty in its own place rather than cancelling
 
 `noval` puts text in the place of a value there is none of, which is how a field says `--` rather than leaving a gap in its template. It covers both forms: `noval=--` with `frmt=Pref: $1$` draws `Pref: --` whether the value was missing or empty, and still draws `Pref: 0` for a zero.
 
-**`src=url` fetches a value from the web.** The watch fetches the address in `url` about every five minutes, keeps the last value it read, and keeps it when a fetch fails, so the field shows nothing only until the first fetch succeeds. The answer has to be JSON, and small: the watch reads it in a small amount of memory, so a large answer, such as a whole news feed, is not read at all. `jsonsrc` is a dotted path into it: `jsonsrc=bitcoin.usd` reads `77590` out of `{"bitcoin":{"usd":77590}}`. A step that is a whole number indexes a list instead of an object, so `items.0.title` reads the first headline of `{"items":[{"title":...}]}` and `items.-1.title` the last.
+**`src=url` fetches a value from the web.** The watch fetches the address in `url` about every five minutes, keeps the last value it read, and keeps it when a fetch fails, so the field shows nothing only until the first fetch succeeds. The answer has to be JSON, and small: the watch reads it in a small amount of memory, so a large answer, such as a whole news feed, is not read at all. `jsonsrc` is a dotted path into it: `jsonsrc=data.0.quotes.USD.price` reads `64964` out of `{"data":[{"quotes":{"USD":{"price":64964}}}]}`. A step that is a whole number indexes a list instead of an object, as the `0` does there, so `items.0.title` reads the first headline of `{"items":[{"title":...}]}` and `items.-1.title` the last.
 
 ### 5.5 Formatting
 
