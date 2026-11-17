@@ -33,7 +33,7 @@ Ten fields down the middle of the screen: the battery, the date, the time in the
 
 Six fields carry an **icon** in place of a text label. `f9` is the only one that chooses its icon by rule rather than by name: its `iconif` covers every weather condition in nine rules by naming the condition groups of `wCondS`, and it is the worked example of section 5.10.3. The time has no icon on purpose: at `FONT_NUMBER_HOT` it is the one field nothing should compete with.
 
-Three choices in it make the default work on as many watches as possible. Every field names a **system font** with `sysfont` rather than a vector font, because two of the 39 supported watches have no vector font at all, and on those a field naming only a vector font is drawn in `FONT_SMALL`. Every position is a **percentage**, so the layout scales from a 218 pixel screen to a 466 pixel one without a second config. And every field is drawn `vcenter`, which makes the y percentage the middle of the text rather than its top, so a watch whose system fonts are taller does not push the lower fields off the screen.
+Three choices in it make the default work on as many watches as possible. Every field names a **system font** with `sysfont` rather than a vector font, because two of the 40 supported watches have no vector font at all, and on those a field naming only a vector font is drawn in `FONT_SMALL`. Every position is a **percentage**, so the layout scales from a 218 pixel screen to a 466 pixel one without a second config. And every field is drawn `vcenter`, which makes the y percentage the middle of the text rather than its top, so a watch whose system fonts are taller does not push the lower fields off the screen.
 
 Nine of the ten fields colour their text by the time of day, which keeps it readable when the background picture changes with the sun. The six upper ones write `colorif=isDay=1:black,*:0x00aaff`: black over the light sky of the day picture, light blue on the dark night picture. The three lowest sit over the dark water at the bottom of the day picture and write `colorif=isDay=1:white,*:0x00aaff`, the same rule with white in place of black. The battery is the tenth and colours by charge, with the day as a second condition on its first rule. A single `color` cannot do any of this, because the background changes by rule too.
 
@@ -436,21 +436,20 @@ Two keys choose a font. `sysfont` names one of the nine **system fonts**, which 
 
 `font=#RobotoCondensedBold:20` names the font and its size in pixels; the `#` is optional. The name is written exactly as below, upper and lower case included: `BionicSemiBold` on one watch is spelled `BionicSemibold` on another. A watch that does not have the font draws the field in its `sysfont`, or in `FONT_SMALL` when it names none, without any message.
 
-Four vector fonts are on every one of the 37 supported watches that have vector fonts, and are the ones a config meant for any watch can use. The other two, the Forerunner 255 Music and the Forerunner 255S Music, have no vector font at all.
+Four vector fonts are on every one of the 38 supported watches that have vector fonts, and are the ones a config meant for any watch can use. The other two, the Forerunner 255 Music and the Forerunner 255S Music, have no vector font at all.
 
-| Font | On how many of the 39 watches |
+| Font | On how many of the 40 watches |
 |---|---|
-| `KosugiRegular`, `NotoSansSCMedium`, `RobotoCondensedBold`, `RobotoCondensedRegular` | 37 |
-| `BionicBold` | 28 |
-| `NotoNaskhArabicBold`, `NotoNaskhArabicRegular`, `NotoSansArmenianBold`, `NotoSansArmenianRegular`, `NotoSansHebrewBold`, `NotoSansHebrewRegular` | 27 |
-| `NanumGothicBold`, `PridiRegular`, `RobotoItalic`, `RobotoRegular` | 23 |
+| `KosugiRegular`, `NotoSansSCMedium`, `RobotoCondensedBold`, `RobotoCondensedRegular` | 38 |
+| `BionicBold`, `NotoNaskhArabicBold`, `NotoNaskhArabicRegular`, `NotoSansArmenianBold`, `NotoSansArmenianRegular`, `NotoSansHebrewBold`, `NotoSansHebrewRegular` | 28 |
+| `NanumGothicBold`, `PridiRegular`, `RobotoItalic`, `RobotoRegular` | 24 |
 | `BionicMedium`, `RobotoMedium` | 12 |
 | `NanumGothicRegular`, `PridiRegularGarmin`, `SakkalMajallaBold`, `SakkalMajallaRoman`, `Swiss721Bold`, `Swiss721Regular` | 10 |
 | `NanumGothicExtraBold`, `PridiSemiBoldGarmin`, `RobotoCondensedRegularItalic` | 4 |
 | `BionicSemiBold` | 3 |
-| `BionicSemibold`, `RobotoBlack` | 1 |
+| `BionicSemibold`, `RobotoBlack`, `YantramanavRegular` | 1 |
 
-The fēnix 7 and epix 2 Pro watches have eleven: the four, `BionicBold`, and the six of the row of ten. The fēnix 8 and fēnix 9 watches mostly have seventeen, and the newer Forerunners fourteen or fifteen. On the fēnix 7 and epix 2 Pro watches `BionicBold` has digits and no letters.
+The fēnix 7 and epix 2 Pro watches have eleven: the four, `BionicBold`, and the six of the row of ten. The fēnix 8 and fēnix 9 watches mostly have seventeen, the newer Forerunners fourteen or fifteen, and the Venu X1 fifteen, `YantramanavRegular` among them. On the fēnix 7 and epix 2 Pro watches `BionicBold` has digits and no letters.
 
 A font draws only the characters it contains, and it does not borrow a missing one from another font, so a language needs a font that has its script:
 
@@ -484,7 +483,7 @@ A font draws only the characters it contains, and it does not borrow a missing o
 | `FONT_NUMBER_HOT` | numbers | 18 to 21 |
 | `FONT_NUMBER_THAI_HOT` | numbers | 20 to 24 |
 
-Each watch decides the size of each of them, which is why the heights are ranges: they were measured across the 39 supported watches, and a small screen gets relatively larger text. On a 260 pixel fēnix 7 the digits of `FONT_TINY` are 17 pixels tall, of `FONT_SMALL` 19, of `FONT_MEDIUM` 22 and of `FONT_NUMBER_HOT` 50. A line of text takes about 1.4 times the height of its digits, for the letters that reach above and below them, so two fields one above the other want their `y` at least that far apart.
+Each watch decides the size of each of them, which is why the heights are ranges: they were measured across the 40 supported watches, and a small screen gets relatively larger text. On a 260 pixel fēnix 7 the digits of `FONT_TINY` are 17 pixels tall, of `FONT_SMALL` 19, of `FONT_MEDIUM` 22 and of `FONT_NUMBER_HOT` 50. A line of text takes about 1.4 times the height of its digits, for the letters that reach above and below them, so two fields one above the other want their `y` at least that far apart.
 
 **The four number fonts are for numbers.** On the fēnix 7, epix 2 Pro and Forerunner 255 Music watches they contain the digits, the space and `# % + - . / :` and nothing else, so a word in a field drawn with one goes missing there. Keep words in a text font: the time is `FONT_NUMBER_HOT` and its label, if any, is a field of its own.
 
@@ -552,7 +551,7 @@ An icon is a small picture drawn beside a field's text, named by `icon`:
 [f1]src=hr;icon=hr;pos=50%,40%;just=center|vcenter;frmt=$1$ bpm;
 ```
 
-An icon is drawn on every watch, in the colour of the field's text or in its own through `iconcolorif`. Its size follows the screen: 24 pixels on screens up to 280 pixels across, 31 on 360 to 416 and 38 on 454 and 466, which is about 1.2 times the height of `FONT_SMALL` text. A field carries at most one icon.
+An icon is drawn on every watch, in the colour of the field's text or in its own through `iconcolorif`. Its size follows the screen: 24 pixels on screens up to 280 pixels across, 31 on 360 to 416 and 38 on 448 to 466, which is about 1.2 times the height of `FONT_SMALL` text. A field carries at most one icon.
 
 These are all the icons. A name is written exactly as below, upper and lower case included.
 
